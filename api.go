@@ -41,7 +41,7 @@ func (s *Scraper) RequestAPI(req *http.Request, target interface{}) error {
 	
 	// use cookie
 	if len(s.xCsrfToken) > 0 {
-		req.Header.Set("Cookie", s.cookie)
+// 		req.Header.Set("Cookie", s.cookie)
 		req.Header.Set("x-csrf-token", s.xCsrfToken)
 	}
 
