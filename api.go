@@ -35,7 +35,7 @@ func (s *Scraper) RequestAPI(req *http.Request, target interface{}) error {
 	req.Header.Set("Authorization", "Bearer "+s.bearerToken)
 	req.Header.Set("X-Guest-Token", s.guestToken)
 
-	for cookie := range Cookies {
+	for _, cookie := range Cookies {
 		req.AddCookie(cookie)	
 	}
 	
