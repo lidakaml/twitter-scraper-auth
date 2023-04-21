@@ -8,9 +8,13 @@ import (
 	"time"
 )
 
-const bearerToken string = "AAAAAAAAAAAAAAAAAAAAAPYXBAAAAAAACLXUNDekMxqa8h%2F40K4moUkGsoc%3DTYfbDKbT3jJPCEVnMYqilB28NHfOPqkca3qaAxGfsyKCs0wRbw"
+var bearerToken = "AAAAAAAAAAAAAAAAAAAAAPYXBAAAAAAACLXUNDekMxqa8h%2F40K4moUkGsoc%3DTYfbDKbT3jJPCEVnMYqilB28NHfOPqkca3qaAxGfsyKCs0wRbw"
 
 var Cookies []*http.Cookie
+
+func SetBearer(bearer string) {
+	bearerToken = bearer
+}
 
 // RequestAPI get JSON from frontend API and decodes it
 func (s *Scraper) RequestAPI(req *http.Request, target interface{}) error {
