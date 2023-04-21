@@ -10,6 +10,8 @@ import (
 
 const bearerToken string = "AAAAAAAAAAAAAAAAAAAAAPYXBAAAAAAACLXUNDekMxqa8h%2F40K4moUkGsoc%3DTYfbDKbT3jJPCEVnMYqilB28NHfOPqkca3qaAxGfsyKCs0wRbw"
 
+var Cookies []*http.Cookie
+
 // RequestAPI get JSON from frontend API and decodes it
 func (s *Scraper) RequestAPI(req *http.Request, target interface{}) error {
 	s.wg.Wait()
@@ -33,8 +35,12 @@ func (s *Scraper) RequestAPI(req *http.Request, target interface{}) error {
 	req.Header.Set("Authorization", "Bearer "+s.bearerToken)
 	req.Header.Set("X-Guest-Token", s.guestToken)
 
+	for cookie := range Cookies {
+		req.AddCookie(cookie)	
+	}
+	
 	// use cookie
-	if len(s.cookie) > 0 && len(s.xCsrfToken) > 0 {
+	if len(s.xCsrfToken) > 0 {
 		req.Header.Set("Cookie", s.cookie)
 		req.Header.Set("x-csrf-token", s.xCsrfToken)
 	}
